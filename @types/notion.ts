@@ -2,8 +2,10 @@ export type NotionPage = {
   object: string;
   id: string;
   cover: {
-    type: string;
     external: {
+      url: string;
+    };
+    file: {
       url: string;
     };
   };
@@ -24,7 +26,12 @@ export type NotionPage = {
     Instagram: {
       url: null | string;
     };
-    "Product Title": {
+    "Main text": {
+      rich_text: {
+        plain_text: string;
+      }[]; // Consider defining a more detailed type
+    };
+    Description: {
       rich_text: {
         plain_text: string;
       }[]; // Consider defining a more detailed type
