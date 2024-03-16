@@ -1,5 +1,5 @@
 export default async function getHomePageDetails() {
-  const response = await fetch("http://localhost:3000/api/Home");
+  const response = await fetch("http://localhost:3000/api/getHome");
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }

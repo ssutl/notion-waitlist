@@ -26,32 +26,16 @@ export default async function handler(
   });
   const faqsDBId = children_response.results[0].id;
 
-  //Write the question to the faqs database under Question property
-  const upload_response = await notion.pages.create({
-    parent: { database_id: faqsDBId },
-    properties: {
-      Question: {
-        rich_text: [
-          {
-            type: "text",
-            text: {
-              content: req.body.question,
-            },
-          },
-        ],
-      },
-      Email: {
-        title: [
-          {
-            type: "text",
-            text: {
-              content: req.body.email,
-            },
-          },
-        ],
+  //Read all the FAQs which have the tag display and check box true
+  const FAQDB = await notion.databases.query({
+    database_id: faqsDBId,
+    filter: {
+      property: "Display",
+      checkbox: {
+        equals: true,
       },
     },
   });
 
-  res.status(200).json("Question added to FAQs database successfully!");
+  res.status(200).json(FAQDB.results);
 }

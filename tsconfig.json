@@ -16,6 +16,12 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "notion_services.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "notion_services.ts",
+    "src/Functions"
+  ],
   "exclude": ["node_modules"]
 }

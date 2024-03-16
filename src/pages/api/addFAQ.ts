@@ -1,6 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { NotionPage } from "../../../@types/notion";
 const { Client } = require("@notionhq/client");
 
 const notion = new Client({
@@ -9,33 +8,42 @@ const notion = new Client({
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<any>
 ) {
-  console.log(req.body);
   const response = await notion.databases.query({
     database_id: process.env.NEXT_PUBLIC_NOTION_CMS_DATABASE_ID,
     filter: {
       property: "ID",
       unique_id: {
-        equals: 4,
+        equals: 2,
       },
     },
   });
 
-  const WAITLISTPAGEID = response.results[0].id;
+  const FAQPAGEID = response.results[0].id;
   const children_response = await notion.blocks.children.list({
-    block_id: WAITLISTPAGEID,
+    block_id: FAQPAGEID,
   });
-  const waitlistDBId = children_response.results[0].id;
+  const faqsDBId = children_response.results[0].id;
 
   //Write the question to the faqs database under Question property
   const upload_response = await notion.pages.create({
-    parent: { database_id: waitlistDBId },
+    parent: { database_id: faqsDBId },
     properties: {
+      Question: {
+        rich_text: [
+          {
+            type: "Title",
+            text: {
+              content: req.body.question,
+            },
+          },
+        ],
+      },
       Email: {
         title: [
           {
-            type: "text",
+            type: "Email",
             text: {
               content: req.body.email,
             },
@@ -45,5 +53,5 @@ export default async function handler(
     },
   });
 
-  res.status(200).json("Email added to waitlist database successfully!");
+  res.status(200).json("Question added to FAQs database successfully!");
 }

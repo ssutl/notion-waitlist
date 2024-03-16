@@ -3,7 +3,7 @@ export default async function createWaitlistEntry({
 }: {
   email: string;
 }) {
-  const res = await fetch("http://localhost:3000/api/Waitlist", {
+  const res = await fetch("http://localhost:3000/api/addWaitlist", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

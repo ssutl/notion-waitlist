@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { NotionPage } from "../../../@types/notion";
+import { NotionPage } from "../../../@types/types";
 const { Client } = require("@notionhq/client");
 
 const notion = new Client({
