@@ -25,15 +25,16 @@ export default async function handler(
     block_id: FAQPAGEID,
   });
   const faqsDBId = children_response.results[0].id;
+  console.log(faqsDBId);
 
   //Write the question to the faqs database under Question property
   const upload_response = await notion.pages.create({
     parent: { database_id: faqsDBId },
     properties: {
       Question: {
-        rich_text: [
+        title: [
           {
-            type: "Title",
+            type: "text",
             text: {
               content: req.body.question,
             },
@@ -41,14 +42,7 @@ export default async function handler(
         ],
       },
       Email: {
-        title: [
-          {
-            type: "Email",
-            text: {
-              content: req.body.email,
-            },
-          },
-        ],
+        email: req.body.email,
       },
     },
   });

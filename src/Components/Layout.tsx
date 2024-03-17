@@ -14,7 +14,7 @@ const Layout = ({ children }: any) => {
         <Image
           src="/Home.gif"
           alt="Home"
-          className="cursor-pointer absolute top-10 right-10 z-10"
+          className="cursor-pointer fixed top-10 right-10 z-10"
           onClick={() => router.push("/")}
           width={30}
           height={30}
@@ -22,6 +22,9 @@ const Layout = ({ children }: any) => {
         />
       )}
       {children}
+      <div className="w-full h-20 flex justify-center px-10 items-center">
+        <p>This website is powered by The Startup Template</p>
+      </div>
     </>
   );
 };

@@ -124,9 +124,6 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
         <h1 onClick={() => router.push("/FAQs")} className="mb-10 text-xl">
           Read FAQ ↗
         </h1>
-        <div className="w-full flex justify-center items-center">
-          <p>This website is powered by The Startup Template</p>
-        </div>
       </div>
     </div>
   );
