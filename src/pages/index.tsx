@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { CMS_NOTION_PAGE } from "../../@types/types";
 import getHomePageDetails from "@/Functions/getHome";
@@ -26,12 +26,26 @@ export default function Home({
 InferGetServerSidePropsType<typeof getServerSideProps>) {
   const emailRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const [hasSignedUp, setHasSignedUp] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  useEffect(() => {
+    const signedUp = sessionStorage.getItem("userSignedUp") === "true";
+    setHasSignedUp(signedUp);
+  }, []);
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(emailRef.current?.value); // Logs the value of the input field
-    if (emailRef.current?.value)
-      createWaitlistEntry({ email: emailRef.current.value });
+    const email = emailRef.current?.value;
+    if (email) {
+      try {
+        await createWaitlistEntry({ email });
+        setHasSignedUp(true);
+        sessionStorage.setItem("userSignedUp", "true");
+        (event.target as HTMLFormElement).reset();
+      } catch (error) {
+        console.error("Signup failed", error);
+      }
+    }
   };
 
   return (
@@ -69,9 +83,12 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
           />
           <button
             type="submit"
-            className="w-full h-14 bg-black text-white rounded-md font-semibold text-base mb-8 md:mb-5 md:text-2xl lg:w-fit lg:px-5 lg:ml-7"
+            disabled={hasSignedUp}
+            className={`w-full h-14 ${
+              hasSignedUp ? "bg-green-300" : "bg-black hover:bg-gray-500"
+            } text-white rounded-md font-semibold text-base mb-8 md:mb-5 md:text-2xl lg:w-fit lg:px-5 lg:ml-7`}
           >
-            Join the waitlist
+            {hasSignedUp ? "Joined!" : "Join the waitlist"}
           </button>
         </form>
         {dashboardContent.properties.Instagram.url ||

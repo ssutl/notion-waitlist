@@ -27,18 +27,26 @@ export default function FAQ({
   const [searchTerm, setSearchTerm] = useState<string>("");
   const questionRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
+  const [QuestionSuccess, setQuestionSuccess] = useState(false);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    if (emailRef.current?.value && questionRef.current?.value)
+    if (emailRef.current?.value && questionRef.current?.value) {
       createFAQEntry({
         email: emailRef.current.value,
         question: questionRef.current.value,
       });
+      setQuestionSuccess(true);
+      setTimeout(() => {
+        setQuestionSuccess(false);
+      }, 1000);
+    }
+
+    (event.target as HTMLFormElement).reset();
   };
 
   return (
-    <div className="w-screen flex flex-col overflow-y-scroll py-14 px-10 lg:px-12">
+    <div className="w-full flex flex-col overflow-y-scroll py-14 px-10 lg:px-12">
       {FAQContent.length > 0 ? (
         <>
           <h1 className="text-4xl mt-10 mb-5 font-semibold md:text-5xl">
@@ -118,9 +126,11 @@ export default function FAQ({
         />
         <button
           type="submit"
-          className="w-full h-14 bg-black text-white rounded-md font-semibold text-base md:text-2xl"
+          className={`w-full h-14 bg-black text-white rounded-md font-semibold text-base md:text-2xl ${
+            QuestionSuccess ? "bg-green-300" : "hover:bg-gray-500"
+          } `}
         >
-          Ask question
+          {QuestionSuccess ? "Asked!" : "Ask question"}
         </button>
       </form>
     </div>
