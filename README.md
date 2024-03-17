@@ -1,6 +1,8 @@
 # PROJECT TITLE
 
-![image](https://user-images.githubusercontent.com/76885270/227809003-0fc6ed22-50fc-4e93-8b3d-b7e6222d4691.png)
+![image](src="https://github.com/ssutl/notion-waitlist/assets/76885270/009a63b8-e1c9-4f51-adb6-ae4fdc71529c")
+
+
 
 # What it is
 Create a waiting list page using notion as the CMS. Using notion as a CMS allows user interest to be easily guaged
