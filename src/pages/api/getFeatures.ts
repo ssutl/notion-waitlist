@@ -1,4 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 const { Client } = require("@notionhq/client");
 
@@ -10,32 +9,51 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  const response = await notion.databases.query({
-    database_id: process.env.NEXT_PUBLIC_NOTION_CMS_DATABASE_ID,
-    filter: {
-      property: "ID",
-      unique_id: {
-        equals: 3,
+  try {
+    // Attempt to query the main database to find the specific page
+    const response = await notion.databases.query({
+      database_id: process.env.NEXT_PUBLIC_NOTION_CMS_DATABASE_ID,
+      filter: {
+        property: "ID",
+        unique_id: {
+          equals: 3, // Make sure this value is correct for the ID you're trying to match
+        },
       },
-    },
-  });
+    });
 
-  const FEATURESPAGEID = response.results[0].id;
-  const children_response = await notion.blocks.children.list({
-    block_id: FEATURESPAGEID,
-  });
-  const galleryID = children_response.results[0].id;
+    // Check if the page is found
+    if (response.results.length === 0) {
+      return res.status(404).json({ message: "Features page not found." });
+    }
 
-  //Read all the FAQs which have the tag display and check box true
-  const FAQDB = await notion.databases.query({
-    database_id: galleryID,
-    filter: {
-      property: "Publish",
-      checkbox: {
-        equals: true,
+    const FEATURESPAGEID = response.results[0].id;
+    const children_response = await notion.blocks.children.list({
+      block_id: FEATURESPAGEID,
+    });
+
+    // Check if there are any children blocks
+    if (children_response.results.length === 0) {
+      return res.status(404).json({ message: "Features block not found." });
+    }
+
+    const galleryID = children_response.results[0].id;
+
+    // Query the nested database for published items
+    const FAQDB = await notion.databases.query({
+      database_id: galleryID,
+      filter: {
+        property: "Publish",
+        checkbox: {
+          equals: true,
+        },
       },
-    },
-  });
+    });
 
-  res.status(200).json(FAQDB.results);
+    // Successfully return the filtered results
+    res.status(200).json(FAQDB.results);
+  } catch (error) {
+    console.error("Error fetching features from Notion:", error);
+    // Respond with a server error and the error message
+    res.status(500).json({ message: "Failed to fetch features." });
+  }
 }

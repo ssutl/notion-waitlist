@@ -113,7 +113,7 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
         </p>
         <h1
           onClick={() => router.push("/Features")}
-          className="mb-10 text-xl md:text-2xl"
+          className="mb-10 text-xl md:text-2xl cursor-pointer underline underline-offset-8"
         >
           Read Features ↗
         </h1>
@@ -126,7 +126,7 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
         </p>
         <h1
           onClick={() => router.push("/FAQs")}
-          className="text-xl md:text-2xl"
+          className="text-xl md:text-2xl cursor-pointer underline underline-offset-8"
         >
           Read FAQ ↗
         </h1>

@@ -22,7 +22,7 @@ export default function Features({
   FeaturesContent,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <div className="w-screen py-14 px-10 lg:px-12">
+    <div className="w-full py-14 px-10 lg:px-12">
       {FeaturesContent.length ? (
         FeaturesContent.map((feature, index) => {
           return (
@@ -75,7 +75,14 @@ export default function Features({
           );
         })
       ) : (
-        <h1>Feature list coming soon!</h1>
+        <>
+          <h1 className="text-4xl font-semibold mb-10 md:text-5xl md:mb-8">
+            New features being added soon!
+          </h1>
+          <h1 className="text-4xl font-semibold mb-10 md:text-5xl md:mb-8">
+            You&apos;re in the right place, stay tuned!
+          </h1>
+        </>
       )}
     </div>
   );
