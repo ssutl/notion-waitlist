@@ -11,20 +11,18 @@ const Layout = ({ children }: any) => {
     <>
       {router.pathname !== "/" && (
         // Display Home.gif
-        <Image
-          src="/Home.gif"
-          alt="Home"
-          className="cursor-pointer fixed top-10 right-10 z-10"
-          onClick={() => router.push("/")}
-          width={30}
-          height={30}
-          onClickCapture={() => router.push("/")}
-        />
+        <div className="cursor-pointer fixed top-10 right-10 z-10 w-10 h-10 md:w-14 md:h-14">
+          <Image
+            src="/Home.gif"
+            alt="Home"
+            onClick={() => router.push("/")}
+            layout="fill"
+            objectFit="cover"
+            onClickCapture={() => router.push("/")}
+          />
+        </div>
       )}
       {children}
-      <div className="w-full h-20 flex justify-center px-10 items-center">
-        <p>This website is powered by The Startup Template</p>
-      </div>
     </>
   );
 };

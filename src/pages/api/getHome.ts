@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { NotionPage } from "../../../@types/types";
+import { CMS_NOTION_PAGE } from "../../../@types/types";
 const { Client } = require("@notionhq/client");
 
 const notion = new Client({
@@ -9,7 +9,7 @@ const notion = new Client({
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<NotionPage>
+  res: NextApiResponse<CMS_NOTION_PAGE>
 ) {
   const response = await notion.databases.query({
     database_id: process.env.NEXT_PUBLIC_NOTION_CMS_DATABASE_ID,

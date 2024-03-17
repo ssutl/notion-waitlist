@@ -70,3 +70,36 @@ export type FAQ_NOTION_PAGE = {
     };
   };
 };
+
+export type FEATURE_NOTION_PAGE = {
+  cover: {
+    file: {
+      url: string;
+    };
+    external: {
+      url: string;
+    };
+  };
+  properties: {
+    Name: {
+      title: {
+        plain_text: string;
+      }[];
+    };
+    Description: {
+      rich_text: {
+        plain_text: string;
+      }[];
+    };
+    Date: {
+      date: {
+        start: string;
+      };
+    };
+    Tags: {
+      multi_select: {
+        name: string;
+      }[];
+    };
+  };
+};
