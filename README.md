@@ -9,7 +9,9 @@ before choosing to continue with project.
 # Features Implemented
 
 1. Waiting list -> NotionDB
+
 2. FAQ management <-> NotionDB
+
 3. Landing customisation <- NotionDB
 
 # How to use it
