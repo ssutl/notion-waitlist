@@ -39,4 +39,4 @@ before choosing to continue with project.
 > [!TIP]
 > Copy the CMS database view URL and extract DB ID.
 	- https://www.notion.so/123456789?v=2c7726cf9c6f463eb98340f828cbc1af&pvs=4
-	- ID: 123456789
+	-> ID: 123456789
