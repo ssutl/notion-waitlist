@@ -1,6 +1,8 @@
-# PROJECT TITLE
+# A Notion waitlist template
 
 ![image](https://github.com/ssutl/notion-waitlist/assets/76885270/009a63b8-e1c9-4f51-adb6-ae4fdc71529c)
+![image](https://github.com/ssutl/notion-waitlist/assets/76885270/21f26a7a-e518-41ad-b97d-1f265f5ec33a)
+
 
 
 
