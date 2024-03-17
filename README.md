@@ -25,5 +25,5 @@ before choosing to continue with project.
 	NEXT_PUBLIC_NOTION_ACCESS_TOKEN=secret_123456789
 	NEXT_PUBLIC_NOTION_CMS_DATABASE_ID=123456789
 	```
-3. run `npm install`
-4. run `npm run dev`
+3. Run `npm install`
+4. Run `npm run dev`
