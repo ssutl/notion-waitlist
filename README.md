@@ -1,6 +1,6 @@
 # PROJECT TITLE
 
-![image](src="https://github.com/ssutl/notion-waitlist/assets/76885270/009a63b8-e1c9-4f51-adb6-ae4fdc71529c")
+![image]("https://github.com/ssutl/notion-waitlist/assets/76885270/009a63b8-e1c9-4f51-adb6-ae4fdc71529c")
 
 
 
