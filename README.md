@@ -14,16 +14,19 @@ before choosing to continue with project.
 
 # How to use it
 
+> [!TIP]
+> Recommend that you grab your ac.
+
 1. Create a notion integration and retrieve your access token
 	- [Notion Integration](https://developers.notion.com/docs/create-a-notion-integration)
 2. Copy the CMS database view URL and extract DB ID
-	- `https://www.notion.so/123456789?v=2c7726cf9c6f463eb98340f828cbc1af&pvs=4`
+	- https://www.notion.so/123456789?v=2c7726cf9c6f463eb98340f828cbc1af&pvs=4
 	- ID: 123456789
-2. Clone this repo
+2. Clone this repoS
 2. Edit the .env file 
 	```
 	NEXT_PUBLIC_NOTION_ACCESS_TOKEN=secret_123456789
 	NEXT_PUBLIC_NOTION_CMS_DATABASE_ID=123456789
 	```
 3. Run `npm install`
-4. Run `npm run dev`
+4. Run`npm run dev`
