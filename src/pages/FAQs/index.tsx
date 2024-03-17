@@ -46,7 +46,7 @@ export default function FAQ({
   };
 
   return (
-    <div className="w-full flex flex-col overflow-y-scroll py-14 px-10 lg:px-12">
+    <div className="w-full flex flex-col py-14 px-10 lg:px-12">
       {FAQContent.length > 0 ? (
         <>
           <h1 className="text-4xl mt-10 mb-5 font-semibold md:text-5xl">
