@@ -11,9 +11,20 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    console.log(req.body);
-    const response = await notion.databases.query({
-      database_id: process.env.NEXT_PUBLIC_NOTION_CMS_DATABASE_ID,
+    const response = await notion.search({
+      query: "Landing page",
+      filter: {
+        value: "database",
+        property: "object",
+      },
+    });
+
+    const removeDashes = (id: string) => id.replace(/-/g, "");
+
+    const responseID = removeDashes(response.results[0].id);
+
+    const response2 = await notion.databases.query({
+      database_id: responseID,
       filter: {
         property: "ID",
         unique_id: {
@@ -23,12 +34,12 @@ export default async function handler(
     });
 
     // Check if the page exists in the response
-    if (response.results.length === 0) {
+    if (response2.results.length === 0) {
       // If no page is found, return a 404 error
       return res.status(404).json({ message: "Waitlist page not found." });
     }
 
-    const WAITLISTPAGEID = response.results[0].id;
+    const WAITLISTPAGEID = response2.results[0].id;
     const children_response = await notion.blocks.children.list({
       block_id: WAITLISTPAGEID,
     });

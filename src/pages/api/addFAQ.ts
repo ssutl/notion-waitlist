@@ -11,9 +11,20 @@ export default async function handler(
   res: NextApiResponse<any>
 ) {
   try {
+    const response = await notion.search({
+      query: "Landing page",
+      filter: {
+        value: "database",
+        property: "object",
+      },
+    });
+
+    const removeDashes = (id: string) => id.replace(/-/g, "");
+
+    const responseID = removeDashes(response.results[0].id);
     // Query the database for the specific ID
-    const response = await notion.databases.query({
-      database_id: process.env.NEXT_PUBLIC_NOTION_CMS_DATABASE_ID,
+    const response2 = await notion.databases.query({
+      database_id: responseID,
       filter: {
         property: "ID",
         unique_id: {
@@ -22,11 +33,11 @@ export default async function handler(
       },
     });
 
-    if (response.results.length === 0) {
+    if (response2.results.length === 0) {
       return res.status(404).json({ message: "Page not found." });
     }
 
-    const FAQPAGEID = response.results[0].id;
+    const FAQPAGEID = response2.results[0].id;
     const children_response = await notion.blocks.children.list({
       block_id: FAQPAGEID,
     });
