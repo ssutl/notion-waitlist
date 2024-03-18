@@ -34,10 +34,18 @@ export type CMS_NOTION_PAGE = {
         plain_text: string;
       }[]; // Consider defining a more detailed type
     };
-    "Site name": {
+    "Product name": {
       rich_text: {
         plain_text: string;
       }[]; // Consider defining a more detailed type
+    };
+    "Release date": {
+      date: {
+        start: string;
+      };
+    };
+    "Released product website": {
+      url: string;
     };
     Description: {
       rich_text: {
