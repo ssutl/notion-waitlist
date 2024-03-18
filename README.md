@@ -1,6 +1,10 @@
-# PROJECT TITLE
+# A Notion waitlist template
 
-![image](https://user-images.githubusercontent.com/76885270/227809003-0fc6ed22-50fc-4e93-8b3d-b7e6222d4691.png)
+![image](https://github.com/ssutl/notion-waitlist/assets/76885270/009a63b8-e1c9-4f51-adb6-ae4fdc71529c)
+![image](https://github.com/ssutl/notion-waitlist/assets/76885270/21f26a7a-e518-41ad-b97d-1f265f5ec33a)
+
+
+
 
 # What it is
 Create a waiting list page using notion as the CMS. Using notion as a CMS allows user interest to be easily guaged
@@ -35,4 +39,4 @@ before choosing to continue with project.
 > [!TIP]
 > Copy the CMS database view URL and extract DB ID.
 	- https://www.notion.so/123456789?v=2c7726cf9c6f463eb98340f828cbc1af&pvs=4
-	- ID: 123456789
+	-> ID: 123456789
