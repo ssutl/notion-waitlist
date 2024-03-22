@@ -1,5 +1,7 @@
 export default async function getHomePageDetails() {
-  const response = await fetch("http://localhost:3000/api/getHome");
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_WEBPAGE_URL}/api/getHome`
+  );
 
   if (!response.ok) {
     throw new Error("Network response was not ok");

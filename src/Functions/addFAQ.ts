@@ -5,7 +5,7 @@ export default async function createFAQEntry({
   email: string;
   question: string;
 }) {
-  const res = await fetch("http://localhost:3000/api/addFAQ", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_WEBPAGE_URL}/api/addFAQ`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
