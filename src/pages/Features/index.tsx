@@ -75,7 +75,7 @@ export default function Features({
                   key={index}
                   className="mb-14 lg:flex lg:flex-row lg:justify-between"
                 >
-                  <div className="h-72 w-full relative rounded-md overflow-hidden mb-10 md:mb-8 md:h-96 lg:w-2/5">
+                  <div className="h-72 w-full relative rounded-md overflow-hidden mb-10 md:mb-8 md:h-96 lg:w-2/5 flex items-center justify-center">
                     <Image
                       src={
                         feature.cover.file

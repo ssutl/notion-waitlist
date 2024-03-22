@@ -228,7 +228,7 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
           </h1>
           <div className="w-full flex justify-center items-center mt-16">
             <p className="text-base md:text-xl">
-              This website is powered by The Startup Template
+              This website is powered by The SSPLATE
             </p>
           </div>
         </div>
