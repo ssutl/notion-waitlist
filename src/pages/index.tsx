@@ -7,27 +7,33 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import CountdownComponent from "@/Components/CountdownComponent";
+import getPricingDetails from "@/Functions/getPricing";
 
 export const getServerSideProps: GetServerSideProps<{
   dashboardContent: CMS_NOTION_PAGE;
+  pricingContent: CMS_NOTION_PAGE;
 }> = async (context) => {
   //Make a req to the api directory /api/Home.ts
   const dashboardContentResponse = await getHomePageDetails();
+  const pricingContentResponse = await getPricingDetails();
 
   return {
     props: {
       dashboardContent: dashboardContentResponse,
+      pricingContent: pricingContentResponse,
     },
   };
 };
 
 export default function Home({
   dashboardContent,
+  pricingContent,
 }: // ...
 InferGetServerSidePropsType<typeof getServerSideProps>) {
   const emailRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [hasSignedUp, setHasSignedUp] = useState(false);
+  console.log(pricingContent);
 
   useEffect(() => {
     const signedUp = sessionStorage.getItem("userSignedUp") === "true";
@@ -238,6 +244,7 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
           >
             Read FAQ ↗
           </h1>
+
           <div className="w-full flex justify-center items-center mt-16">
             <p className="text-base md:text-xl">
               This website is powered by SSPLATE
