@@ -39,10 +39,10 @@ const CountdownComponent = ({ date }: CountdownComponentProps) => {
   }, [date]);
 
   return (
-    <div className="flex mb-12 flex-col w-full justify-center md:w-3/5 lg:w-full lg:mb-14 xl:w-10/12">
-      <div className="flex justify-between">
+    <div className="flex mb-12 flex-col w-full justify-center lg:mb-14">
+      <div className="flex justify-between xl:justify-normal">
         <div className="flex flex-col">
-          <span className="countdown font-semibold text-5xl md:text-6xl lg:text-8xl xl:text-9xl">
+          <span className="countdown font-semibold text-5xl md:text-7xl  xl:text-8xl xl:mr-10">
             <span
               style={{ "--value": time.days } as React.CSSProperties}
             ></span>
@@ -50,7 +50,7 @@ const CountdownComponent = ({ date }: CountdownComponentProps) => {
           <p className="text-base md:text-2xl">days</p>
         </div>
         <div className="flex flex-col">
-          <span className="countdown font-semibold text-5xl md:text-6xl lg:text-8xl xl:text-9xl">
+          <span className="countdown font-semibold text-5xl md:text-7xl  xl:text-8xl xl:mr-10">
             <span
               style={{ "--value": time.hours } as React.CSSProperties}
             ></span>
@@ -58,7 +58,7 @@ const CountdownComponent = ({ date }: CountdownComponentProps) => {
           <p className="text-base md:text-2xl">hours</p>
         </div>
         <div className="flex flex-col">
-          <span className="countdown font-semibold text-5xl md:text-6xl lg:text-8xl xl:text-9xl">
+          <span className="countdown font-semibold text-5xl md:text-7xl  xl:text-8xl xl:mr-10">
             <span
               style={{ "--value": time.minutes } as React.CSSProperties}
             ></span>
@@ -66,7 +66,7 @@ const CountdownComponent = ({ date }: CountdownComponentProps) => {
           <p className="text-base md:text-2xl">min</p>
         </div>
         <div className="flex flex-col">
-          <span className="countdown font-semibold text-5xl md:text-6xl lg:text-8xl xl:text-9xl">
+          <span className="countdown font-semibold text-5xl md:text-7xl  xl:text-8xl xl:mr-10">
             <span
               style={{ "--value": time.seconds } as React.CSSProperties}
             ></span>
