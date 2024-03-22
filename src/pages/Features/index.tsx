@@ -27,7 +27,6 @@ export default function Features({
   FeaturesContent,
   dashboardContent,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log(FeaturesContent);
   return (
     <>
       <Head>

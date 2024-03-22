@@ -29,8 +29,6 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
   const [hasSignedUp, setHasSignedUp] = useState(false);
 
-  console.log(dashboardContent);
-
   useEffect(() => {
     const signedUp = sessionStorage.getItem("userSignedUp") === "true";
     setHasSignedUp(signedUp);
@@ -154,36 +152,54 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
               </button>
             </form>
           ) : null}
-          {dashboardContent.properties.Instagram.url ||
-          dashboardContent.properties.X.url ||
-          dashboardContent.properties.Youtube ? (
-            <div className="w-full flex justify-start items-center relative mb-12">
-              {Object.keys(dashboardContent.properties).map((social, key) => {
-                if (
-                  social === "Instagram" ||
-                  social === "X" ||
-                  social === "Youtube"
-                ) {
-                  return (
-                    <a
-                      key={key}
-                      href={dashboardContent.properties[social].url ?? ""}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <Image
-                        src={`/Socials/${social}.png`}
-                        alt={social}
-                        width={50}
-                        height={50}
-                        className="mr-4 w-9"
-                      />
-                    </a>
-                  );
-                }
-              })}
-            </div>
-          ) : null}
+          <div className="w-full flex justify-start items-center relative mb-12">
+            {dashboardContent.properties.Instagram.url && (
+              <a
+                href={dashboardContent.properties.Instagram.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="/Socials/Instagram.png"
+                  alt="Instagram logo"
+                  width={50}
+                  height={50}
+                  className="mr-4 w-9"
+                />
+              </a>
+            )}
+            {dashboardContent.properties.Youtube.url && (
+              <a
+                href={dashboardContent.properties.Youtube.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="/Socials/Youtube.png"
+                  alt="Youtube logo"
+                  width={50}
+                  height={50}
+                  className="mr-4 w-9"
+                />
+              </a>
+            )}
+            {dashboardContent.properties.X.url && (
+              <a
+                href={dashboardContent.properties.X.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="/Socials/X.png"
+                  alt="X logo"
+                  width={50}
+                  height={50}
+                  className="mr-4 w-9"
+                />
+              </a>
+            )}
+          </div>
+
           <h1 className="text-2xl font-semibold mb-4 text-left md:text-3xl">
             Not convinced?
           </h1>

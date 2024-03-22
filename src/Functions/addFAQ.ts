@@ -16,6 +16,5 @@ export default async function createFAQEntry({
     }),
   });
   const ApiResponse = await res.json();
-  console.log(ApiResponse);
   return ApiResponse;
 }
