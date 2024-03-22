@@ -42,7 +42,7 @@ export type CMS_NOTION_PAGE = {
     "Release date": {
       date: {
         start: string;
-      };
+      } | null;
     };
     "Released product website": {
       url: string;

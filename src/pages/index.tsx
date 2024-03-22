@@ -6,6 +6,7 @@ import createWaitlistEntry from "@/Functions/addWaitlist";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import CountdownComponent from "@/Components/CountdownComponent";
 
 export const getServerSideProps: GetServerSideProps<{
   dashboardContent: CMS_NOTION_PAGE;
@@ -27,6 +28,8 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
   const emailRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [hasSignedUp, setHasSignedUp] = useState(false);
+
+  console.log(dashboardContent);
 
   useEffect(() => {
     const signedUp = sessionStorage.getItem("userSignedUp") === "true";
@@ -111,24 +114,46 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
                   .plain_text
               : "This is the description, change the Description property in Notion to see the changes here!"}
           </p>
-          <form onSubmit={handleSubmit} className="w-full">
-            <input
-              type={"email"}
-              placeholder={"Johndoe@example.com"}
-              ref={emailRef}
-              required
-              className="w-full h-14 outline outline-1  outline-slate-400 text-base rounded-md mb-3 p-2.5 md:mb-5 md:text-2xl lg:w-1/2 lg:mb-7 lg:px-5"
+          {dashboardContent.properties["Release date"].date &&
+          new Date(dashboardContent.properties["Release date"].date.start) >
+            new Date() &&
+          dashboardContent.properties["Released product website"].url ===
+            null ? (
+            <CountdownComponent
+              date={dashboardContent.properties["Release date"].date.start}
             />
-            <button
-              type="submit"
-              disabled={hasSignedUp}
-              className={`w-full h-14 ${
-                hasSignedUp ? "bg-green-300" : "bg-black hover:bg-gray-500"
-              } text-white rounded-md font-semibold text-base mb-8 md:mb-5 md:text-2xl lg:w-fit lg:px-5 lg:ml-7`}
+          ) : null}
+          {dashboardContent.properties["Released product website"].url && (
+            <a
+              href={dashboardContent.properties["Released product website"].url}
+              target="_blank"
+              rel="noreferrer"
+              className="mb-10 text-xl md:text-2xl cursor-pointer underline underline-offset-8"
             >
-              {hasSignedUp ? "Joined!" : "Join the waitlist"}
-            </button>
-          </form>
+              Visit the product drop ↗
+            </a>
+          )}
+          {dashboardContent.properties["Released product website"].url ===
+          null ? (
+            <form onSubmit={handleSubmit} className="w-full">
+              <input
+                type={"email"}
+                placeholder={"Johndoe@example.com"}
+                ref={emailRef}
+                required
+                className="w-full h-14 outline outline-1  outline-slate-400 text-base rounded-md mb-3 p-2.5 md:mb-5 md:text-2xl lg:w-1/2 lg:mb-7 lg:px-5"
+              />
+              <button
+                type="submit"
+                disabled={hasSignedUp}
+                className={`w-full h-14 ${
+                  hasSignedUp ? "bg-green-300" : "bg-black hover:bg-gray-500"
+                } text-white rounded-md font-semibold text-base mb-8 md:mb-5 md:text-2xl lg:w-fit lg:px-5 lg:ml-7`}
+              >
+                {hasSignedUp ? "Joined!" : "Join the waitlist"}
+              </button>
+            </form>
+          ) : null}
           {dashboardContent.properties.Instagram.url ||
           dashboardContent.properties.X.url ||
           dashboardContent.properties.Youtube ? (

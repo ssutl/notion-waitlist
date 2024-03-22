@@ -14,6 +14,11 @@ module.exports = {
       },
     },
   },
+  daisyui: {
+    themes: false, // disable all themes
+    darkTheme: false, // enable dark theme
+    base: false, // disable base theme
+  },
   variants: {},
-  plugins: [],
+  plugins: [require("daisyui")],
 };
