@@ -27,6 +27,7 @@ export default function Features({
   FeaturesContent,
   dashboardContent,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  console.log(FeaturesContent);
   return (
     <>
       <Head>
@@ -87,19 +88,24 @@ export default function Features({
                 </div>
                 <span className="lg:w-11/20">
                   <h1 className="text-4xl font-semibold mb-5 md:mb-6 md:text-5xl">
-                    {feature.properties.Name.title[0].plain_text}
+                    {feature.properties.Name.title.length > 0
+                      ? feature.properties.Name.title[0].plain_text
+                      : "Title"}
                   </h1>
                   <p className="text-base mb-5 md:text-xl">
-                    {feature.properties.Description.rich_text[0].plain_text}
+                    {feature.properties.Description.rich_text.length > 0
+                      ? feature.properties.Description.rich_text[0].plain_text
+                      : "Description"}
                   </p>
                   <p className="text-base mb-5 md:text-xl">
-                    {new Date(
-                      feature.properties.Date.date.start
-                    ).toLocaleDateString("en-US", {
-                      weekday: "long",
-                      day: "numeric",
-                      month: "long",
-                    })}
+                    {feature.properties.Date.date !== null &&
+                      new Date(
+                        feature.properties.Date.date.start
+                      ).toLocaleDateString("en-US", {
+                        weekday: "long",
+                        day: "numeric",
+                        month: "long",
+                      })}
                   </p>
                   <div className="w-full flex">
                     {feature.properties.Tags.multi_select.map((tag, index) => {

@@ -26,7 +26,7 @@ export default async function handler(
     const response2 = await notion.databases.query({
       database_id: responseID,
       filter: {
-        property: "ID",
+        property: "‼️ PageNo.",
         unique_id: {
           equals: 1,
         },
