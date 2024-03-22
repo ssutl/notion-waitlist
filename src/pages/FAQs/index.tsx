@@ -35,6 +35,8 @@ export default function FAQ({
   const emailRef = useRef<HTMLInputElement>(null);
   const [QuestionSuccess, setQuestionSuccess] = useState(false);
 
+  console.log(FAQContent);
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     if (emailRef.current?.value && questionRef.current?.value) {
@@ -49,6 +51,16 @@ export default function FAQ({
     }
 
     (event.target as HTMLFormElement).reset();
+  };
+
+  const renderWithLineBreaks = (text: string) => {
+    return text
+      .split("\n")
+      .map((line: string, index: number, array: string[]) => (
+        <p className="mb-3 text-base md:text-2xl" key={index}>
+          {line}
+        </p>
+      ));
   };
 
   return (
@@ -122,22 +134,24 @@ export default function FAQ({
                     )
                   }
                 >
-                  <h1 className="text-xl font-semibold max-w-60 md:text-3xl md:max-w-xl">
+                  <h1 className="text-xl font-normal max-w-60 md:text-3xl md:max-w-xl">
                     {FAQ.properties["Question"].title[0].plain_text}
                   </h1>
                   <button className="text-3xl md:text-4xl">+</button>
                 </div>
-                <p
+                <div
                   className={`${
                     expandedQuestionIndex === key
                       ? "pb-5 border-b-2 border-solid border-gray-700"
                       : "h-0"
-                  }  mb-5 text-base transition-max-height duration-500 ease-in-out overflow-hidden md:text-2xl`}
+                  } mb-5 transition-max-height duration-500 ease-in-out overflow-hidden`}
                 >
                   {expandedQuestionIndex === key
-                    ? FAQ.properties["Response"].rich_text[0].plain_text
+                    ? renderWithLineBreaks(
+                        FAQ.properties["Response"].rich_text[0].plain_text
+                      )
                     : null}
-                </p>
+                </div>
               </div>
             ))}
           </>

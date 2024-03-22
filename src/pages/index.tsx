@@ -49,6 +49,16 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
     }
   };
 
+  const renderWithLineBreaks = (text: string) => {
+    return text
+      .split("\n")
+      .map((line: string, index: number, array: string[]) => (
+        <p className="text-base mb-3 md:text-2xl" key={index}>
+          {line}
+        </p>
+      ));
+  };
+
   return (
     <>
       <Head>
@@ -106,12 +116,14 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
               ? dashboardContent.properties["Main text"].rich_text[0].plain_text
               : "Welcome to the dashboard, change the Main Text property in Notion to see the changes here!"}
           </h1>
-          <p className="text-base mb-10 md:text-2xl">
-            {dashboardContent.properties["Description"].rich_text[0]
-              ? dashboardContent.properties["Description"].rich_text[0]
-                  .plain_text
-              : "This is the description, change the Description property in Notion to see the changes here!"}
-          </p>
+          <div className="mb-10">
+            {renderWithLineBreaks(
+              dashboardContent.properties["Description"].rich_text[0]
+                ? dashboardContent.properties["Description"].rich_text[0]
+                    .plain_text
+                : "This is the description, change the Description property in Notion to see the changes here!"
+            )}
+          </div>
           {dashboardContent.properties["Release date"].date &&
           new Date(dashboardContent.properties["Release date"].date.start) >
             new Date() &&
@@ -228,7 +240,7 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
           </h1>
           <div className="w-full flex justify-center items-center mt-16">
             <p className="text-base md:text-xl">
-              This website is powered by The SSPLATE
+              This website is powered by SSPLATE
             </p>
           </div>
         </div>
