@@ -115,21 +115,17 @@ export default function FAQ({
               <div key={key}>
                 <div
                   key={key}
-                  className="w-full flex justify-between border-b-2 mb-5 pb-4 border-solid border-black flex-row items-center "
+                  className="w-full flex justify-between border-b-2 mb-5 pb-4 border-solid border-black flex-row items-center cursor-pointer"
+                  onClick={() =>
+                    setExpandedQuestionIndex(
+                      key === expandedQuestionIndex ? null : key
+                    )
+                  }
                 >
                   <h1 className="text-xl font-semibold max-w-60 md:text-3xl md:max-w-xl">
                     {FAQ.properties["Question"].title[0].plain_text}
                   </h1>
-                  <button
-                    className="text-3xl md:text-4xl"
-                    onClick={() =>
-                      setExpandedQuestionIndex(
-                        key === expandedQuestionIndex ? null : key
-                      )
-                    }
-                  >
-                    +
-                  </button>
+                  <button className="text-3xl md:text-4xl">+</button>
                 </div>
                 <p
                   className={`${
