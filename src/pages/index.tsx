@@ -299,46 +299,48 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
           >
             Read FAQ ↗
           </h1>
-          <h1 className="text-2xl font-semibold mb-4 text-left md:text-3xl">
-            Pricing?
-          </h1>
           {callouts.length > 0 ? (
-            <div className="w-full flex flex-col items-center 2xl:flex-row 2xl:justify-between">
-              {callouts.slice(0, 3).map((eachCallout, i) => (
-                <div
-                  key={i}
-                  className="border border-black rounded-md py-5 px-5 box-border w-full mb-5 2xl:px-5 2xl:w-3/10 2xl:h-full 2xl:mt-0 cursor-pointer hover:bg-sky-100"
-                >
-                  <h2 className="text-2xl font-semibold mb-4 text-left md:text-3xl">
-                    {eachCallout.title}
-                  </h2>
-                  {eachCallout.doneItems.map((item, j) => (
-                    <div className="w-full flex mb-3 2xl:mb-0" key={j}>
-                      <input
-                        type="checkbox"
-                        checked={true}
-                        disabled={true}
-                        className="mr-3 h-4 w-4 mt-auto mb-auto"
-                      />
-                      <p className="text-base md:text-2xl line-through">
-                        {item}
-                      </p>
-                    </div>
-                  ))}
-                  {eachCallout.notDoneItems.map((item, j) => (
-                    <div className="w-full flex mb-3" key={j}>
-                      <input
-                        type="checkbox"
-                        checked={false}
-                        disabled={true}
-                        className="mr-3 h-4 w-4 mt-auto mb-auto"
-                      />
-                      <p className="text-base md:text-2xl">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
+            <>
+              <h1 className="text-2xl font-semibold mb-4 text-left md:text-3xl">
+                Pricing?
+              </h1>
+              <div className="w-full flex flex-col items-center 2xl:flex-row 2xl:justify-between">
+                {callouts.slice(0, 3).map((eachCallout, i) => (
+                  <div
+                    key={i}
+                    className="border border-black rounded-md py-5 px-5 box-border w-full mb-5 2xl:px-5 2xl:w-3/10 2xl:h-full 2xl:mt-0 cursor-pointer hover:bg-sky-100"
+                  >
+                    <h2 className="text-2xl font-semibold mb-4 text-left md:text-3xl">
+                      {eachCallout.title}
+                    </h2>
+                    {eachCallout.doneItems.map((item, j) => (
+                      <div className="w-full flex mb-3 2xl:mb-0" key={j}>
+                        <input
+                          type="checkbox"
+                          checked={true}
+                          disabled={true}
+                          className="mr-3 h-4 w-4 mt-auto mb-auto"
+                        />
+                        <p className="text-base md:text-2xl line-through">
+                          {item}
+                        </p>
+                      </div>
+                    ))}
+                    {eachCallout.notDoneItems.map((item, j) => (
+                      <div className="w-full flex mb-3" key={j}>
+                        <input
+                          type="checkbox"
+                          checked={false}
+                          disabled={true}
+                          className="mr-3 h-4 w-4 mt-auto mb-auto"
+                        />
+                        <p className="text-base md:text-2xl">{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </>
           ) : null}
           <div className="w-full flex justify-center items-center mt-16">
             <p className="text-base md:text-xl">
