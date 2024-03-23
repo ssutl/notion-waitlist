@@ -45,7 +45,6 @@ export default async function handler(
 
     const mdblocks = await n2m.pageToMarkdown(PRICEPAGEID);
     const mdString = n2m.toMarkdownString(mdblocks);
-
     res.status(200).json(mdString.parent);
   } catch (error) {
     console.error("Error fetching FAQs:", error);

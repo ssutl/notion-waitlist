@@ -8,10 +8,11 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import CountdownComponent from "@/Components/CountdownComponent";
 import getPricingDetails from "@/Functions/getPricing";
+import ReactMarkdown from "react-markdown";
 
 export const getServerSideProps: GetServerSideProps<{
   dashboardContent: CMS_NOTION_PAGE;
-  pricingContent: CMS_NOTION_PAGE;
+  pricingContent: string;
 }> = async (context) => {
   //Make a req to the api directory /api/Home.ts
   const dashboardContentResponse = await getHomePageDetails();
@@ -25,6 +26,58 @@ export const getServerSideProps: GetServerSideProps<{
   };
 };
 
+function parseCallouts(markdown: string): {
+  title: string;
+  doneItems: string[];
+  notDoneItems: string[];
+}[] {
+  const callouts: {
+    title: string;
+    doneItems: string[];
+    notDoneItems: string[];
+  }[] = [];
+
+  const lines = markdown.split("\n");
+
+  let currentCallout: {
+    title: string;
+    doneItems: string[];
+    notDoneItems: string[];
+  } | null = null;
+
+  lines.forEach((line) => {
+    if (line.startsWith(">")) {
+      const cleanLine = line.substring(1).trim(); // Remove '>' and trim whitespace
+      if (currentCallout === null) {
+        // It's the start of a new callout
+        currentCallout = { title: cleanLine, doneItems: [], notDoneItems: [] };
+      } else {
+        // It's a part of the current callout
+        const notDoneItemMatch = cleanLine.match(/- \[ \] (.+)/);
+        const doneItemMatch = cleanLine.match(/- \[x\] (.+)/);
+
+        if (notDoneItemMatch) {
+          currentCallout.notDoneItems.push(notDoneItemMatch[1]);
+        } else if (doneItemMatch) {
+          currentCallout.doneItems.push(doneItemMatch[1]);
+        }
+      }
+    } else if (currentCallout !== null) {
+      // No longer a callout line, so save the current callout and reset
+      callouts.push(currentCallout);
+      currentCallout = null; // Reset for the next callout
+    }
+    // Ignore non-callout lines that are not immediately following a callout
+  });
+
+  // Check if there's an unclosed callout at the end
+  if (currentCallout !== null) {
+    callouts.push(currentCallout);
+  }
+
+  return callouts;
+}
+
 export default function Home({
   dashboardContent,
   pricingContent,
@@ -33,6 +86,8 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
   const emailRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [hasSignedUp, setHasSignedUp] = useState(false);
+
+  const callouts = parseCallouts(pricingContent);
   console.log(pricingContent);
 
   useEffect(() => {
@@ -240,11 +295,51 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
           </p>
           <h1
             onClick={() => router.push("/FAQs")}
-            className="text-xl md:text-2xl cursor-pointer underline underline-offset-8"
+            className="text-xl md:text-2xl cursor-pointer underline underline-offset-8 mb-10"
           >
             Read FAQ ↗
           </h1>
-
+          <h1 className="text-2xl font-semibold mb-4 text-left md:text-3xl">
+            Pricing?
+          </h1>
+          {callouts.length > 0 ? (
+            <div className="w-full flex flex-col items-center 2xl:flex-row 2xl:justify-between">
+              {callouts.slice(0, 3).map((eachCallout, i) => (
+                <div
+                  key={i}
+                  className="border border-black rounded-md py-5 px-5 box-border w-full mb-5 2xl:px-5 2xl:w-3/10 2xl:h-full 2xl:mt-0 cursor-pointer hover:bg-sky-100"
+                >
+                  <h2 className="text-2xl font-semibold mb-4 text-left md:text-3xl">
+                    {eachCallout.title}
+                  </h2>
+                  {eachCallout.doneItems.map((item, j) => (
+                    <div className="w-full flex mb-3 2xl:mb-0" key={j}>
+                      <input
+                        type="checkbox"
+                        checked={true}
+                        disabled={true}
+                        className="mr-3 h-4 w-4 mt-auto mb-auto"
+                      />
+                      <p className="text-base md:text-2xl line-through">
+                        {item}
+                      </p>
+                    </div>
+                  ))}
+                  {eachCallout.notDoneItems.map((item, j) => (
+                    <div className="w-full flex mb-3" key={j}>
+                      <input
+                        type="checkbox"
+                        checked={false}
+                        disabled={true}
+                        className="mr-3 h-4 w-4 mt-auto mb-auto"
+                      />
+                      <p className="text-base md:text-2xl">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          ) : null}
           <div className="w-full flex justify-center items-center mt-16">
             <p className="text-base md:text-xl">
               This website is powered by SSPLATE

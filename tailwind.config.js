@@ -11,6 +11,7 @@ module.exports = {
       },
       width: {
         "11/20": "55%",
+        "3/10": "30%",
       },
     },
   },
@@ -20,5 +21,5 @@ module.exports = {
     base: false, // disable base theme
   },
   variants: {},
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), require("@tailwindcss/typography")],
 };
