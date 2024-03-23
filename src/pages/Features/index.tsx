@@ -103,14 +103,11 @@ export default function Features({
                         ? feature.properties.Name.title[0].plain_text
                         : "Title"}
                     </h1>
-                    <p className="text-base mb-5 md:text-xl">
-                      {feature.properties.Description.rich_text.length > 0
-                        ? renderWithLineBreaks(
-                            feature.properties.Description.rich_text[0]
-                              .plain_text
-                          )
-                        : "Description"}
-                    </p>
+                    {feature.properties.Description.rich_text.length > 0
+                      ? renderWithLineBreaks(
+                          feature.properties.Description.rich_text[0].plain_text
+                        )
+                      : "Description"}
                     <p className="text-base mb-5 md:text-xl">
                       {feature.properties.Date.date !== null &&
                         new Date(
