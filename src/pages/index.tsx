@@ -301,14 +301,14 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
           </h1>
           {callouts.length > 0 ? (
             <>
-              <h1 className="text-2xl font-semibold mb-4 text-left md:text-3xl">
+              <h1 className="text-2xl font-semibold mb-6 text-left md:text-3xl">
                 Pricing?
               </h1>
-              <div className="w-full flex flex-col items-center 2xl:flex-row 2xl:justify-between">
+              <div className="w-full flex flex-col items-center 2xl:grid 2xl:grid-cols-auto 2xl:grid-flow-col 2xl:gap-x-7 2xl:items-start">
                 {callouts.slice(0, 3).map((eachCallout, i) => (
                   <div
                     key={i}
-                    className="border border-black rounded-md py-5 px-5 box-border w-full mb-5 2xl:px-5 2xl:w-3/10 2xl:h-full 2xl:mt-0 cursor-pointer hover:bg-sky-100"
+                    className="border border-black rounded-md py-5 px-5 box-border w-full mb-5 2xl:px-5 2xl:mt-0 cursor-pointer hover:bg-sky-100 2xl:h-full"
                   >
                     <h2 className="text-2xl font-semibold mb-4 text-left md:text-3xl">
                       {eachCallout.title}

@@ -23,6 +23,16 @@ export const getServerSideProps: GetServerSideProps<{
   };
 };
 
+const renderWithLineBreaks = (text: string) => {
+  return text
+    .split("\n")
+    .map((line: string, index: number, array: string[]) => (
+      <p className="text-base mb-3 md:text-2xl" key={index}>
+        {line}
+      </p>
+    ));
+};
+
 export default function Features({
   FeaturesContent,
   dashboardContent,
@@ -95,7 +105,10 @@ export default function Features({
                     </h1>
                     <p className="text-base mb-5 md:text-xl">
                       {feature.properties.Description.rich_text.length > 0
-                        ? feature.properties.Description.rich_text[0].plain_text
+                        ? renderWithLineBreaks(
+                            feature.properties.Description.rich_text[0]
+                              .plain_text
+                          )
                         : "Description"}
                     </p>
                     <p className="text-base mb-5 md:text-xl">
