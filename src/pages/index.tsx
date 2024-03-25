@@ -332,6 +332,17 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
                     <h2 className="text-2xl font-semibold mb-4 text-left md:text-3xl">
                       {eachCallout.title}
                     </h2>
+                    {eachCallout.notDoneItems.map((item, j) => (
+                      <div className="w-full flex mb-3" key={j}>
+                        <input
+                          type="checkbox"
+                          checked={false}
+                          disabled={true}
+                          className="mr-3 h-4 w-4 mt-auto mb-auto"
+                        />
+                        <p className="text-base md:text-2xl">{item}</p>
+                      </div>
+                    ))}
                     {eachCallout.doneItems.map((item, j) => (
                       <div className="w-full flex mb-3 2xl:mb-0" key={j}>
                         <input
@@ -343,17 +354,6 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
                         <p className="text-base md:text-2xl line-through">
                           {item}
                         </p>
-                      </div>
-                    ))}
-                    {eachCallout.notDoneItems.map((item, j) => (
-                      <div className="w-full flex mb-3" key={j}>
-                        <input
-                          type="checkbox"
-                          checked={false}
-                          disabled={true}
-                          className="mr-3 h-4 w-4 mt-auto mb-auto"
-                        />
-                        <p className="text-base md:text-2xl">{item}</p>
                       </div>
                     ))}
                   </div>
