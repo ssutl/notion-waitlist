@@ -87,9 +87,20 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
   const emailRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [hasSignedUp, setHasSignedUp] = useState(false);
+  const [currentDate, setCurrentDate] = useState(new Date());
 
   const callouts = parseCallouts(pricingContent);
-  console.log(pricingContent);
+
+  useEffect(() => {
+    // Set an interval to update the current date every minute
+    // This interval duration can be adjusted based on how precise you need the countdown to be
+    const intervalId = setInterval(() => {
+      setCurrentDate(new Date());
+    }, 1000); // Updates every minute
+
+    // Clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, []);
 
   useEffect(() => {
     const signedUp = sessionStorage.getItem("userSignedUp") === "true";
@@ -120,6 +131,16 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
         </p>
       ));
   };
+
+  const isReleaseDateInFuture =
+    dashboardContent.properties["Release date"].date &&
+    new Date(dashboardContent.properties["Release date"].date.start) >
+      currentDate;
+
+  const shouldDisplayProductUrl =
+    dashboardContent.properties["Released product website"].url &&
+    (!isReleaseDateInFuture ||
+      dashboardContent.properties["Release date"].date === null);
 
   return (
     <>
@@ -186,16 +207,13 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
                 : "This is the description, change the Description property in Notion to see the changes here!"
             )}
           </div>
-          {dashboardContent.properties["Release date"].date &&
-          new Date(dashboardContent.properties["Release date"].date.start) >
-            new Date() &&
-          dashboardContent.properties["Released product website"].url ===
-            null ? (
+          {isReleaseDateInFuture &&
+          dashboardContent.properties["Release date"].date ? (
             <CountdownComponent
               date={dashboardContent.properties["Release date"].date.start}
             />
           ) : null}
-          {dashboardContent.properties["Released product website"].url && (
+          {shouldDisplayProductUrl ? (
             <a
               href={dashboardContent.properties["Released product website"].url}
               target="_blank"
@@ -204,7 +222,7 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
             >
               Visit the product drop ↗
             </a>
-          )}
+          ) : null}
           {dashboardContent.properties["Released product website"].url ===
           null ? (
             <form onSubmit={handleSubmit} className="w-full">
