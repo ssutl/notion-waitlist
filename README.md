@@ -33,8 +33,3 @@ before choosing to continue with project.
 > [!TIP]
 > Create a notion integration and retrieve your access token.
 	- [Notion Integration](https://developers.notion.com/docs/create-a-notion-integration)
-
-> [!TIP]
-> Copy the CMS database view URL and extract DB ID.
-	- https://www.notion.so/123456789?v=2c7726cf9c6f463eb98340f828cbc1af&pvs=4
-	-> ID: 123456789
