@@ -91,6 +91,8 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
 
   const callouts = parseCallouts(pricingContent);
 
+  console.log(dashboardContent);
+
   useEffect(() => {
     // Set an interval to update the current date every minute
     // This interval duration can be adjusted based on how precise you need the countdown to be
@@ -145,6 +147,10 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
       <Head>
+        <link
+          rel="icon"
+          href={`data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2285%22>${dashboardContent.icon.emoji}</text></svg>`}
+        ></link>
         <title>
           {dashboardContent.properties["Product name"].rich_text[0].plain_text}
         </title>

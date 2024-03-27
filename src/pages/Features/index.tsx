@@ -41,7 +41,8 @@ export default function Features({
     <>
       <Head>
         <title>
-          {dashboardContent.properties["Product name"].rich_text[0].plain_text}
+          {dashboardContent.properties["Product name"].rich_text[0].plain_text}{" "}
+          - Features
         </title>
         <meta
           name="description"

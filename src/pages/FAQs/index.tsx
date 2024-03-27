@@ -67,7 +67,8 @@ export default function FAQ({
     <>
       <Head>
         <title>
-          {dashboardContent.properties["Product name"].rich_text[0].plain_text}
+          {dashboardContent.properties["Product name"].rich_text[0].plain_text}{" "}
+          - FAQs
         </title>
         <meta
           name="description"
