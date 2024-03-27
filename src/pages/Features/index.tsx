@@ -79,7 +79,12 @@ export default function Features({
       <div className="w-full py-14 px-10 lg:px-12">
         {FeaturesContent.length ? (
           FeaturesContent.slice()
-            .reverse()
+            .sort((a, b) => {
+              return (
+                new Date(b.properties.Date.date.start).getTime() -
+                new Date(a.properties.Date.date.start).getTime()
+              );
+            })
             .map((feature, index) => {
               return (
                 <div
