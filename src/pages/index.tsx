@@ -302,7 +302,7 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
             Not convinced?
           </h1>
           <p className="mb-4 text-base md:text-2xl">
-            There&apos;s way more to be excited about, checkout our features
+            There&apos;s way more to be excited about, check out our features
             page to see more!
           </p>
           <h1
